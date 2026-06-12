@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shruti Singhal — Technical Writing Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #252320f1;
+    --surface: #1f1b18f3;
+    --surface2: #242018;
+    --border: #2e2a24;
+    --border2: #3a342c;
+    --ink: #e8e0d4;
+    --ink2: #b0a898;
+    --ink3: #7a7268;
+    --accent: #c8784a;
+    --accent-dim: #8a4e2e;
+    --accent-bg: #1e150e;
+    --warm: #d4a870;
+    --code-bg: #0e0c0a;
+    --code-border: #2a2620;
+    --green: #5a8a6a;
+    --green-bg: #0a120d;
+    --tag-bg: #1e1a14;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* NAV */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+  }
+
+  .header-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--warm);
+    letter-spacing: 0.02em;
+  }
+
+  .header-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--ink3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* TABS */
+  .tab-bar {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    padding: 0 2.5rem;
+    background: var(--surface);
+    gap: 0;
+    overflow-x: auto;
+  }
+
+  .tab {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+
+  .tab:hover { color: var(--ink2); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* PANELS */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* LAYOUT */
+  .doc-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: calc(100vh - 108px);
+  }
+
+  .sidebar {
+    border-right: 1px solid var(--border);
+    padding: 2rem 1.5rem;
+    position: sticky;
+    top: 108px;
+    height: calc(100vh - 108px);
+    overflow-y: auto;
+  }
+
+  .sidebar-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 1rem;
+  }
+
+  .sidebar nav a {
+    display: block;
+    font-size: 0.92rem;
+    color: var(--ink3);
+    text-decoration: none;
+    padding: 0.3rem 0;
+    border-left: 2px solid transparent;
+    padding-left: 0.75rem;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .sidebar nav a:hover { color: var(--ink2); border-left-color: var(--border2); }
+  .sidebar nav a.active { color: var(--accent); border-left-color: var(--accent); }
+
+  .sidebar nav .sub-link {
+    padding-left: 1.5rem;
+    font-size: 0.78rem;
+  }
+
+  /* CONTENT */
+  .content {
+    padding: 3rem 3.5rem;
+    max-width: 820px;
+  }
+
+  /* TYPOGRAPHY */
+  .doc-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .doc-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ink3);
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .doc-intro {
+    font-size: 1rem;
+    color: var(--ink2);
+    line-height: 1.8;
+    border-left: 2px solid var(--accent-dim);
+    padding-left: 1.25rem;
+    margin-bottom: 2.5rem;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--warm);
+    margin: 2.5rem 0 0.75rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  h2:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  h3 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 1.75rem 0 0.5rem;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.01em;
+  }
+
+  p { margin-bottom: 1rem; color: var(--ink2); }
+
+  strong { color: var(--ink); font-weight: 500; }
+
+  /* CODE */
+  code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82em;
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+    color: var(--warm);
+  }
+
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    margin: 1rem 0 1.5rem;
+    position: relative;
+  }
+
+  pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.82rem;
+    color: var(--ink2);
+    line-height: 1.7;
+  }
+
+  .pre-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 0.4rem;
+  }
+
+  /* NOTE / WARNING BOXES */
+  .note {
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent-dim);
+    padding: 0.9rem 1.25rem;
+    margin: 1.25rem 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.88rem;
+    color: var(--ink2);
+  }
+
+  .note strong { color: var(--accent); }
+
+  .tip {
+    background: var(--green-bg);
+    border-left: 3px solid var(--green);
+    padding: 0.9rem 1.25rem;
+    margin: 1.25rem 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.88rem;
+    color: var(--ink2);
+  }
+
+  .tip strong { color: var(--green); }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; margin: 1.25rem 0 1.75rem; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.86rem;
+  }
+
+  th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    text-align: left;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border2);
+    background: var(--surface);
+  }
+
+  td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink2);
+    vertical-align: top;
+  }
+
+  td code { font-size: 0.78rem; }
+
+  tr:last-child td { border-bottom: none; }
+
+  /* TAGS */
+  .tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    padding: 0.2em 0.6em;
+    border-radius: 3px;
+    background: var(--tag-bg);
+    border: 1px solid var(--border2);
+    color: var(--ink3);
+    margin-right: 0.4rem;
+  }
+
+  .tag.get { color: #5a9a7a; border-color: #1a3a28; background: #0a1810; }
+  .tag.required { color: var(--accent); border-color: var(--accent-dim); background: var(--accent-bg); }
+
+  /* STEP LIST */
+  .steps { counter-reset: step; list-style: none; margin: 1rem 0 1.5rem; }
+  .steps li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    align-items: start;
+  }
+  .steps li::before {
+    content: counter(step);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-dim);
+    width: 1.8rem;
+    height: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+  .steps li p { margin-bottom: 0.25rem; }
+
+  /* DIAGRAM */
+  .diagram {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin: 1.25rem 0 1.75rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--ink3);
+    line-height: 2;
+    overflow-x: auto;
+  }
+
+  .diagram .highlight { color: var(--accent); }
+  .diagram .arrow { color: var(--ink3); }
+
+  /* TOKEN VISUAL */
+  .token-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 1rem 0;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .token-box {
+    padding: 0.3rem 0.6rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    border: 1px solid;
+  }
+
+  .tok-word { background: #101a14; border-color: #1e3828; color: #7aaf8a; }
+  .tok-sub { background: #1a1008; border-color: #382010; color: #c8784a; }
+  .tok-punct { background: #10101a; border-color: #20203a; color: #7a7aaf; }
+  .tok-id { font-size: 0.62rem; color: var(--ink3); display: block; text-align: center; margin-top: 0.15rem; }
+
+  /* ENDPOINT BLOCK */
+  .endpoint {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    margin: 1.5rem 0;
+    overflow: hidden;
+  }
+
+  .endpoint-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+  }
+
+  .endpoint-path {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--ink);
+  }
+
+  .endpoint-body { padding: 1.25rem; }
+  .endpoint-body p { font-size: 0.88rem; }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { color: var(--ink2); margin-bottom: 0.35rem; }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ABOUT SECTION */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 2rem 0;
+  }
+
+  .about-cell {
+    background: var(--surface);
+    padding: 1.5rem;
+  }
+
+  .about-cell-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 0.5rem;
+  }
+
+  .about-cell-value { font-size: 0.9rem; color: var(--ink2); }
+
+  @media (max-width: 768px) {
+    .doc-layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .content { padding: 2rem 1.25rem; }
+    header { padding: 1rem 1.25rem; }
+    .tab-bar { padding: 0 1.25rem; }
+    .about-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="header-name">Shruti Singhal</div>
+    <div class="header-sub">Technical Writing Portfolio</div>
+  </div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--ink3);">shruti.singhal4@gmail.com</div>
+</header>
+
+<div class="tab-bar">
+  <button class="tab active" onclick="switchTab('about')">About</button>
+  <button class="tab" onclick="switchTab('tokenisation')">01 · Tokenisation in LLMs</button>
+  <button class="tab" onclick="switchTab('antconc')">02 · Getting Started with AntConc</button>
+  <button class="tab" onclick="switchTab('metapi')">03 · Met Museum API Reference</button>
+</div>
+
+<!-- ABOUT PANEL -->
+<div id="panel-about" class="panel active">
+  <div class="doc-layout">
+    <div class="sidebar">
+      <div class="sidebar-label">On this page</div>
+      <nav>
+        <a href="#about-intro">Overview</a>
+        <a href="#about-pieces">The pieces</a>
+        <a href="#about-background">Background</a>
+      </nav>
+    </div>
+    <div class="content">
+      <div class="doc-eyebrow">Portfolio</div>
+      <h1 id="about-intro">Technical Writing Samples</h1>
+      <div class="doc-meta">
+        <span>Shruti Singhal</span>
+        <span>MA Linguistics, University of Zurich</span>
+        <span>2026</span>
+      </div>
+      <p class="doc-intro">Three samples demonstrating range across documentation types: a conceptual explainer for developers, a procedural getting-started guide, and an API reference. All work was produced independently.</p>
+
+      <h2 id="about-pieces">The pieces</h2>
+      <div class="about-grid">
+        <div class="about-cell">
+          <div class="about-cell-label">01 · Conceptual</div>
+          <div class="about-cell-value" style="font-weight:500;color:var(--ink);margin-bottom:0.4rem;">How Tokenisation Works in LLMs</div>
+          <p style="font-size:0.85rem;margin:0;">A plain-language explainer for developers new to NLP. Covers subword tokenisation, vocabulary tradeoffs, and why it matters for prompting. Written to be technically accurate without requiring a linguistics background.</p>
+        </div>
+        <div class="about-cell">
+          <div class="about-cell-label">02 · Procedural</div>
+          <div class="about-cell-value" style="font-weight:500;color:var(--ink);margin-bottom:0.4rem;">Getting Started with AntConc</div>
+          <p style="font-size:0.85rem;margin:0;">A step-by-step guide for corpus linguists and researchers installing and running their first concordance analysis in AntConc. Written for users with domain knowledge but no prior experience with the tool.</p>
+        </div>
+        <div class="about-cell" style="grid-column: 1 / -1;">
+          <div class="about-cell-label">03 · API Reference</div>
+          <div class="about-cell-value" style="font-weight:500;color:var(--ink);margin-bottom:0.4rem;">Met Museum Collection API Reference</div>
+          <p style="font-size:0.85rem;margin:0;">Reference documentation for two core endpoints of the Metropolitan Museum of Art's public API. Covers authentication, parameters, responses, and error handling with working examples.</p>
+        </div>
+      </div>
+
+      <h2 id="about-background">Background</h2>
+      <p>I'm completing an MA in Linguistics at the University of Zurich, graduating July 2026. My academic work involves corpus construction, structured annotation, and evaluation methodology for NLP systems. Professionally, I have five years of editorial experience spanning copyediting, style guide authorship, and multilingual quality review.</p>
+      <p>These samples are written at the intersection of that background: technically grounded in how language processing actually works, and edited to the standard I'd apply to any published documentation.</p>
+      <div class="about-grid" style="margin-top:1.5rem;">
+        <div class="about-cell">
+          <div class="about-cell-label">Contact</div>
+          <div class="about-cell-value">shruti.singhal4@gmail.com</div>
+        </div>
+        <div class="about-cell">
+          <div class="about-cell-label">Location</div>
+          <div class="about-cell-value">Zurich, Switzerland</div>
+        </div>
+        <div class="about-cell">
+          <div class="about-cell-label">LinkedIn</div>
+          <div class="about-cell-value">linkedin.com/in/shruti-singhal-211034106/</div>
+        </div>
+        <div class="about-cell">
+          <div class="about-cell-label">Available</div>
+          <div class="about-cell-value">From August 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL 1: TOKENISATION -->
+<div id="panel-tokenisation" class="panel">
+  <div class="doc-layout">
+    <div class="sidebar">
+      <div class="sidebar-label">On this page</div>
+      <nav>
+        <a href="#tok-overview">Overview</a>
+        <a href="#tok-what">What is a token?</a>
+        <a href="#tok-subword">Subword tokenisation</a>
+        <a href="#tok-vocab">Vocabulary size</a>
+        <a href="#tok-oov">OOV and unknown tokens</a>
+        <a href="#tok-prompting">Implications for prompting</a>
+        <a href="#tok-summary">Summary</a>
+      </nav>
+    </div>
+    <div class="content">
+      <div class="doc-eyebrow">Conceptual Guide · NLP Fundamentals</div>
+      <h1>How Tokenisation Works in LLMs</h1>
+      <div class="doc-meta">
+        <span>Audience: developers new to NLP</span>
+        <span>Reading time: ~10 min</span>
+      </div>
+      <p class="doc-intro">LLMs do not read text the way humans do. Before any prediction happens, your input is split into tokens — discrete units the model processes one at a time. Understanding this step changes how you write prompts and interpret model behaviour.</p>
+
+      <h2 id="tok-what">What is a token?</h2>
+      <p>A <strong>token</strong> is the smallest unit of text a language model processes. Tokens are not always words. Depending on the tokeniser, a token might be:</p>
+      <ul>
+        <li>A full word: <code>apple</code></li>
+        <li>A word fragment: <code>un</code>, <code>##expected</code></li>
+        <li>A punctuation mark: <code>.</code>, <code>?</code></li>
+        <li>A whitespace character</li>
+      </ul>
+      <p>The model never sees your raw text. It sees a sequence of integer IDs, each corresponding to a token in the model's vocabulary.</p>
+
+      <h3>From text to token IDs</h3>
+      <p>When you send a prompt, the following happens before the model processes anything:</p>
+      <div class="diagram">
+        <span class="highlight">Input text</span><br>
+        "The cat sat on the mat."<br>
+        <span class="arrow">↓ tokeniser</span><br>
+        <span class="highlight">Tokens</span><br>
+        [ "The", " cat", " sat", " on", " the", " mat", "." ]<br>
+        <span class="arrow">↓ vocabulary lookup</span><br>
+        <span class="highlight">Token IDs</span><br>
+        [ 464, 4758, 3332, 319, 262, 2603, 13 ]<br>
+        <span class="arrow">↓ embedding layer</span><br>
+        <span class="highlight">Dense vectors → model input</span>
+      </div>
+      <p>The mapping from token to ID is fixed — it is defined by the tokeniser the model was trained with and does not change at inference time.</p>
+
+      <h2 id="tok-subword">Subword tokenisation</h2>
+      <p>Early NLP systems used either character-level or word-level tokenisation. Both have significant drawbacks:</p>
+      <ul>
+        <li><strong>Character-level:</strong> sequences become very long; relationships between characters are hard to learn.</li>
+        <li><strong>Word-level:</strong> the vocabulary must be enormous to handle every word form; rare words are missed entirely.</li>
+      </ul>
+      <p>Modern LLMs use <strong>subword tokenisation</strong>, which splits text at the level of meaningful fragments. Common subword algorithms include Byte Pair Encoding (BPE), used by GPT models, and WordPiece, used by BERT.</p>
+
+      <h3>How BPE works</h3>
+      <p>BPE starts with individual characters and iteratively merges the most frequent adjacent pairs. The result is a vocabulary where common words appear as single tokens and rare words are broken into recognisable pieces.</p>
+
+      <p>For example, the word <em>unbelievable</em> might tokenise as:</p>
+      <div class="token-strip">
+        <div class="token-box tok-sub">un<span class="tok-id">tok 946</span></div>
+        <div class="token-box tok-sub">bel<span class="tok-id">tok 2071</span></div>
+        <div class="token-box tok-sub">iev<span class="tok-id">tok 494</span></div>
+        <div class="token-box tok-sub">able<span class="tok-id">tok 540</span></div>
+      </div>
+      <p>Whereas a common word like <em>table</em> is a single token:</p>
+      <div class="token-strip">
+        <div class="token-box tok-word">table<span class="tok-id">tok 3084</span></div>
+      </div>
+
+      <div class="note"><strong>Note:</strong> Token boundaries do not always align with morpheme boundaries. The split is statistical, not linguistic. <code>unbelievable</code> might split differently depending on the tokeniser and what was common in the training corpus.</div>
+
+      <h2 id="tok-vocab">Vocabulary size and coverage</h2>
+      <p>A model's vocabulary is the full set of tokens it knows. Vocabulary sizes typically range from 32,000 to 100,000+ tokens. Larger vocabularies mean:</p>
+      <ul>
+        <li>Fewer tokens needed to represent a given text (more efficient)</li>
+        <li>More parameters in the embedding layer (larger model)</li>
+        <li>Better coverage of rare and domain-specific words</li>
+      </ul>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Model family</th><th>Tokeniser</th><th>Vocab size</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>GPT-3 / GPT-4</td><td>BPE (tiktoken)</td><td>~100,000</td><td>Whitespace included in tokens</td></tr>
+            <tr><td>BERT</td><td>WordPiece</td><td>30,522</td><td>## prefix marks subword continuations</td></tr>
+            <tr><td>LLaMA 2</td><td>BPE (SentencePiece)</td><td>32,000</td><td>Multilingual coverage</td></tr>
+            <tr><td>Claude</td><td>BPE</td><td>~100,000</td><td>Similar to GPT-4 family</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="tok-oov">OOV and unknown tokens</h2>
+      <p>An <strong>out-of-vocabulary (OOV)</strong> token is any string not in the model's vocabulary. With subword tokenisation, true OOV situations are rare — most strings can be decomposed into known subword units. However, edge cases include:</p>
+      <ul>
+        <li>Very unusual Unicode characters</li>
+        <li>Strings in scripts not represented in the training data</li>
+        <li>Extremely long tokens with no valid splits</li>
+      </ul>
+      <p>When a tokeniser cannot represent a string, it falls back to a special <code>[UNK]</code> token. Information is lost at this point — the model receives no signal about the original characters.</p>
+      <div class="tip"><strong>Tip:</strong> If a model consistently misreads a proper noun or technical term, it may be tokenising it in an unusual way. Try including the term in a context sentence earlier in your prompt, or experiment with alternative spellings.</div>
+
+      <h2 id="tok-prompting">Implications for prompting</h2>
+      <p>Tokenisation has several practical effects on how models interpret and generate text.</p>
+
+      <h3>Token count ≠ word count</h3>
+      <p>Context window limits are measured in tokens, not words. As a rough rule of thumb, one token is approximately 0.75 words in English. Technical content, code, and non-English text tokenise differently:</p>
+      <ul>
+        <li>English prose: ~1.3 tokens per word</li>
+        <li>Python code: ~1.5–2 tokens per word (operators and indentation add tokens)</li>
+        <li>Chinese or Arabic: 2–4 tokens per character, depending on the tokeniser</li>
+      </ul>
+
+      <h3>Splitting at word boundaries</h3>
+      <p>Many tokenisers encode leading whitespace as part of the token. <code> cat</code> (space + cat) and <code>cat</code> are different tokens. This means the same word may tokenise differently depending on its position in a sentence.</p>
+
+      <h3>Numbers and special characters</h3>
+      <p>Numbers are often split into individual digits. The string <code>2024</code> may become four separate tokens: <code>2</code>, <code>0</code>, <code>2</code>, <code>4</code>. This is one reason LLMs perform poorly on arithmetic — each digit is processed without inherent positional value.</p>
+
+      <h2 id="tok-summary">Summary</h2>
+      <p>Tokenisation converts raw text into the integer sequences that LLMs actually process. Key points:</p>
+      <ul>
+        <li>Tokens are subword units, not words — boundaries are statistical, not linguistic.</li>
+        <li>Every model has a fixed vocabulary defined by its tokeniser.</li>
+        <li>Context window limits are measured in tokens; non-English text is typically less efficient.</li>
+        <li>Understanding tokenisation helps explain why models sometimes misread unusual names, handle numbers poorly, or treat punctuation unexpectedly.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL 2: ANTCONC -->
+<div id="panel-antconc" class="panel">
+  <div class="doc-layout">
+    <div class="sidebar">
+      <div class="sidebar-label">On this page</div>
+      <nav>
+        <a href="#ant-overview">Overview</a>
+        <a href="#ant-before">Before you begin</a>
+        <a href="#ant-install">Installation</a>
+        <a href="#ant-corpus">Loading a corpus</a>
+        <a href="#ant-concordance">Concordance search</a>
+        <a href="#ant-collocates">Collocates</a>
+        <a href="#ant-wordlist">Word list</a>
+        <a href="#ant-next">Next steps</a>
+      </nav>
+    </div>
+    <div class="content">
+      <div class="doc-eyebrow">Getting Started Guide · Corpus Linguistics</div>
+      <h1>Getting Started with AntConc</h1>
+      <div class="doc-meta">
+        <span>Audience: linguists and researchers</span>
+        <span>Time to complete: ~30 min</span>
+        <span>AntConc 4.x</span>
+      </div>
+      <p class="doc-intro">AntConc is a free corpus analysis toolkit used for concordancing, collocation analysis, and frequency profiling. This guide takes you from installation to your first concordance search.</p>
+
+      <h2 id="ant-before">Before you begin</h2>
+      <p>You will need:</p>
+      <ul>
+        <li>A computer running Windows 10+, macOS 10.14+, or Linux (Ubuntu 18.04+)</li>
+        <li>At least one plain text file (.txt) to use as a corpus</li>
+        <li>Approximately 15 minutes for installation and setup</li>
+      </ul>
+      <div class="note"><strong>Note:</strong> AntConc works with plain text files only. If your source material is in .docx, .pdf, or another format, you must convert it to .txt before loading it. Encoding should be UTF-8 for best results with non-ASCII characters.</div>
+
+      <h2 id="ant-install">Installation</h2>
+      <ol class="steps">
+        <li>
+          <div>
+            <p>Go to <strong>laurenceanthony.net/software/antconc</strong> and click <strong>Download</strong>.</p>
+            <p>Select the installer for your operating system. The download is approximately 50 MB.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <p><strong>Windows:</strong> Run the downloaded <code>.exe</code> installer and follow the prompts. Accept the default installation directory.</p>
+            <p><strong>macOS:</strong> Open the <code>.dmg</code> file and drag AntConc to your Applications folder. On first launch, right-click and select <strong>Open</strong> to bypass Gatekeeper.</p>
+            <p><strong>Linux:</strong> Extract the <code>.tar.gz</code> archive and run <code>./AntConc</code> from the extracted folder.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <p>Launch AntConc. The main window opens with an empty file list on the left and a blank concordance view on the right.</p>
+          </div>
+        </li>
+      </ol>
+
+      <h2 id="ant-corpus">Loading a corpus</h2>
+      <p>A corpus in AntConc is a collection of one or more plain text files. You can load a single file or an entire directory.</p>
+      <ol class="steps">
+        <li>
+          <div>
+            <p>From the menu bar, select <strong>File → Open File(s)</strong> to load individual files, or <strong>File → Open Dir</strong> to load all .txt files in a folder.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <p>Navigate to your corpus files and select them. Loaded files appear in the <strong>Corpus Files</strong> panel on the left.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <p>Check the file count and total tokens in the status bar at the bottom. If the count looks wrong, verify that your files are saved as UTF-8 plain text.</p>
+          </div>
+        </li>
+      </ol>
+      <div class="tip"><strong>Tip:</strong> For multilingual corpora, go to <strong>Tool Preferences → Token Definition</strong> and make sure Unicode character classes are enabled. This ensures correct tokenisation of non-Latin scripts.</div>
+
+      <h2 id="ant-concordance">Running a concordance search</h2>
+      <p>A concordance shows every instance of a search term in context — one line per occurrence, with the keyword centred.</p>
+      <ol class="steps">
+        <li>
+          <div>
+            <p>Click the <strong>Concordance</strong> tab at the top of the main window.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <p>Type your search term in the <strong>Search Term</strong> field. For example: <code>argue</code></p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <p>Click <strong>Start</strong> or press <kbd>Enter</kbd>. Results appear in the concordance view, sorted by file by default.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <p>To sort results by the word immediately to the left or right of your search term, use the <strong>Sort</strong> controls. This helps identify common collocations at a glance.</p>
+          </div>
+        </li>
+      </ol>
+
+      <h3>Using wildcards</h3>
+      <p>AntConc supports the following wildcard characters in search terms:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Character</th><th>Matches</th><th>Example</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>*</code></td><td>Zero or more characters</td><td><code>argu*</code> matches <em>argue</em>, <em>argues</em>, <em>arguing</em>, <em>argument</em></td></tr>
+            <tr><td><code>?</code></td><td>Exactly one character</td><td><code>wom?n</code> matches <em>woman</em> and <em>women</em></td></tr>
+            <tr><td><code>|</code></td><td>Either pattern (OR)</td><td><code>cat|dog</code> matches either word</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="ant-collocates">Collocate analysis</h2>
+      <p>The <strong>Collocates</strong> tool finds words that co-occur with your search term more often than chance.</p>
+      <ol class="steps">
+        <li>
+          <div>
+            <p>Click the <strong>Collocates</strong> tab. Your previous search term carries over.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <p>Set the <strong>window span</strong> — how many words to the left and right of the keyword to consider. A span of 3L/3R is standard for most analyses.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <p>Click <strong>Start</strong>. Results are ranked by frequency by default. Click the <strong>Stat</strong> column header to sort by statistical significance (mutual information or t-score).</p>
+          </div>
+        </li>
+      </ol>
+      <div class="note"><strong>Note:</strong> AntConc reports raw frequency and two association measures: <strong>MI (Mutual Information)</strong> and <strong>t-score</strong>. MI favours rare but distinctive collocates; t-score favours frequent collocates. Which to use depends on your research question.</div>
+
+      <h2 id="ant-wordlist">Generating a word list</h2>
+      <p>The <strong>Word List</strong> tool produces a frequency-ranked list of all tokens in your corpus.</p>
+      <ol class="steps">
+        <li>
+          <div>
+            <p>Click the <strong>Word List</strong> tab and then click <strong>Start</strong>.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <p>To remove function words from the results, go to <strong>Tool Preferences → Word List → Lemma List</strong> and load a stopword file. AntConc accepts plain text stopword lists with one word per line.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <p>To export results, right-click anywhere in the word list and select <strong>Save Output to Text File</strong>. The output is a tab-separated file you can open in Excel or import into R.</p>
+          </div>
+        </li>
+      </ol>
+
+      <h2 id="ant-next">Next steps</h2>
+      <p>Once you're comfortable with basic concordance searches and word lists, explore these tools:</p>
+      <ul>
+        <li><strong>N-Grams:</strong> Find the most frequent sequences of 2, 3, or 4 words in your corpus.</li>
+        <li><strong>Keyword List:</strong> Compare your corpus against a reference corpus to identify statistically unusual words. Requires loading a reference corpus via <strong>File → Open Reference Corpus Dir</strong>.</li>
+        <li><strong>Clusters/N-Grams:</strong> Identify recurring multi-word units.</li>
+      </ul>
+      <p>Full documentation is available at <strong>laurenceanthony.net/software/antconc</strong> under the Help section.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL 3: MET API -->
+<div id="panel-metapi" class="panel">
+  <div class="doc-layout">
+    <div class="sidebar">
+      <div class="sidebar-label">On this page</div>
+      <nav>
+        <a href="#met-overview">Overview</a>
+        <a href="#met-base">Base URL and auth</a>
+        <a href="#met-search">Search objects</a>
+        <a href="#met-object">Get object</a>
+        <a href="#met-departments">Departments</a>
+        <a href="#met-errors">Error handling</a>
+        <a href="#met-examples">Full examples</a>
+      </nav>
+    </div>
+    <div class="content">
+      <div class="doc-eyebrow">API Reference · Met Museum Collection API</div>
+      <h1>Met Museum Collection API</h1>
+      <div class="doc-meta">
+        <span>Version: 1.0</span>
+        <span>Base URL: collectionapi.metmuseum.org</span>
+        <span>Auth: none required</span>
+      </div>
+      <p class="doc-intro">The Metropolitan Museum of Art Collection API provides programmatic access to over 470,000 objects in the Met's collection, including images, provenance data, and classification metadata. No API key is required.</p>
+
+      <h2 id="met-base">Base URL and authentication</h2>
+      <p>All requests use the following base URL:</p>
+      <pre><code>https://collectionapi.metmuseum.org/public/collection/v1</code></pre>
+      <p>The API is public and does not require authentication. There are no published rate limits, but the Met requests that you avoid making requests at high frequency. A delay of 200–500 ms between requests is recommended for bulk operations.</p>
+
+      <div class="note"><strong>Note:</strong> The API returns JSON only. All responses are UTF-8 encoded. CORS is enabled, so the API can be called from browser-based applications.</div>
+
+      <h2 id="met-search">Search objects</h2>
+      <p>Returns a list of Object IDs matching your query. Use the returned IDs with the <a href="#met-object">Get Object</a> endpoint to retrieve full records.</p>
+
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="tag get">GET</span>
+          <span class="endpoint-path">/search</span>
+        </div>
+        <div class="endpoint-body">
+          <p>Searches the collection by keyword. Returns an array of matching Object IDs.</p>
+
+          <h3>Query parameters</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>q</code></td>
+                  <td>string</td>
+                  <td><span class="tag required">required</span></td>
+                  <td>Search term. Searches across title, artist name, tags, and other text fields.</td>
+                </tr>
+                <tr>
+                  <td><code>isHighlight</code></td>
+                  <td>boolean</td>
+                  <td></td>
+                  <td>If <code>true</code>, returns only objects designated as Met highlights. Default: <code>false</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>departmentId</code></td>
+                  <td>integer</td>
+                  <td></td>
+                  <td>Limits results to a specific department. See <a href="#met-departments">Departments</a> for valid IDs.</td>
+                </tr>
+                <tr>
+                  <td><code>hasImages</code></td>
+                  <td>boolean</td>
+                  <td></td>
+                  <td>If <code>true</code>, returns only objects with at least one primary image. Default: <code>false</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>medium</code></td>
+                  <td>string</td>
+                  <td></td>
+                  <td>Filters by medium or object type. Examples: <code>Paintings</code>, <code>Sculpture</code>, <code>Drawings</code>. Case-sensitive.</td>
+                </tr>
+                <tr>
+                  <td><code>geoLocation</code></td>
+                  <td>string</td>
+                  <td></td>
+                  <td>Filters by geographic location. Examples: <code>France</code>, <code>Japan</code>. Searches the <code>country</code>, <code>region</code>, and <code>city</code> fields.</td>
+                </tr>
+                <tr>
+                  <td><code>dateBegin</code></td>
+                  <td>integer</td>
+                  <td></td>
+                  <td>Start of date range (year). Use negative values for BCE. Requires <code>dateEnd</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>dateEnd</code></td>
+                  <td>integer</td>
+                  <td></td>
+                  <td>End of date range (year). Requires <code>dateBegin</code>.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Response</h3>
+          <div class="pre-label">200 OK</div>
+          <pre><code>{
+  "total": 412,
+  "objectIDs": [
+    437984,
+    436105,
+    438821,
+    ...
+  ]
+}</code></pre>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>total</code></td><td>integer</td><td>Total number of matching objects.</td></tr>
+                <tr><td><code>objectIDs</code></td><td>array of integers</td><td>IDs of matching objects. Use with the Get Object endpoint.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Example request</h3>
+          <div class="pre-label">Request</div>
+          <pre><code>GET /search?q=sunflowers&hasImages=true&departmentId=11
+Host: collectionapi.metmuseum.org</code></pre>
+          <div class="pre-label">Curl</div>
+          <pre><code>curl "https://collectionapi.metmuseum.org/public/collection/v1/search?q=sunflowers&hasImages=true&departmentId=11"</code></pre>
+        </div>
+      </div>
+
+      <h2 id="met-object">Get object</h2>
+      <p>Returns the full record for a single object by its Object ID.</p>
+
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="tag get">GET</span>
+          <span class="endpoint-path">/objects/{objectID}</span>
+        </div>
+        <div class="endpoint-body">
+          <h3>Path parameters</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>objectID</code></td>
+                  <td>integer</td>
+                  <td><span class="tag required">required</span></td>
+                  <td>The unique identifier for the object. Obtain from the Search endpoint.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Response fields</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>objectID</code></td><td>integer</td><td>Unique object identifier.</td></tr>
+                <tr><td><code>title</code></td><td>string</td><td>Title of the object.</td></tr>
+                <tr><td><code>artistDisplayName</code></td><td>string</td><td>Artist name as displayed in the museum. Empty string if unknown.</td></tr>
+                <tr><td><code>artistNationality</code></td><td>string</td><td>Artist nationality. Empty string if unknown.</td></tr>
+                <tr><td><code>objectDate</code></td><td>string</td><td>Date or date range as a display string. Example: <code>"ca. 1889"</code>.</td></tr>
+                <tr><td><code>objectBeginDate</code></td><td>integer</td><td>Earliest possible date (year). Negative for BCE.</td></tr>
+                <tr><td><code>objectEndDate</code></td><td>integer</td><td>Latest possible date (year).</td></tr>
+                <tr><td><code>medium</code></td><td>string</td><td>Materials used. Example: <code>"Oil on canvas"</code>.</td></tr>
+                <tr><td><code>dimensions</code></td><td>string</td><td>Physical dimensions as a display string.</td></tr>
+                <tr><td><code>department</code></td><td>string</td><td>Department name.</td></tr>
+                <tr><td><code>primaryImage</code></td><td>string</td><td>URL of the primary image (JPEG). Empty string if no image is available.</td></tr>
+                <tr><td><code>primaryImageSmall</code></td><td>string</td><td>URL of a smaller version of the primary image.</td></tr>
+                <tr><td><code>additionalImages</code></td><td>array of strings</td><td>URLs of additional images. Empty array if none.</td></tr>
+                <tr><td><code>isPublicDomain</code></td><td>boolean</td><td>If <code>true</code>, the object is in the public domain and images may be used freely.</td></tr>
+                <tr><td><code>tags</code></td><td>array of objects</td><td>Structured tags. Each tag has a <code>term</code> and <code>AAT_URL</code> field.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Example response</h3>
+          <div class="pre-label">200 OK</div>
+          <pre><code>{
+  "objectID": 437984,
+  "title": "Wheat Field with Cypresses",
+  "artistDisplayName": "Vincent van Gogh",
+  "artistNationality": "Dutch",
+  "objectDate": "1889",
+  "objectBeginDate": 1889,
+  "objectEndDate": 1889,
+  "medium": "Oil on canvas",
+  "dimensions": "28 7/8 x 36 3/4 in. (73.2 x 93.4 cm)",
+  "department": "European Paintings",
+  "primaryImage": "https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg",
+  "primaryImageSmall": "https://images.metmuseum.org/CRDImages/ep/web-large/DT1567.jpg",
+  "additionalImages": [],
+  "isPublicDomain": true,
+  "tags": [
+    {
+      "term": "Landscapes",
+      "AAT_URL": "http://vocab.getty.edu/page/aat/300132294"
+    },
+    {
+      "term": "Cypresses",
+      "AAT_URL": "http://vocab.getty.edu/page/aat/300343641"
+    }
+  ]
+}</code></pre>
+        </div>
+      </div>
+
+      <h2 id="met-departments">Departments</h2>
+      <p>Use department IDs to filter search results to a specific collection area.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Department name</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>American Decorative Arts</td></tr>
+            <tr><td>3</td><td>Ancient Near Eastern Art</td></tr>
+            <tr><td>4</td><td>Arms and Armor</td></tr>
+            <tr><td>6</td><td>Asian Art</td></tr>
+            <tr><td>10</td><td>Egyptian Art</td></tr>
+            <tr><td>11</td><td>European Paintings</td></tr>
+            <tr><td>13</td><td>Greek and Roman Art</td></tr>
+            <tr><td>14</td><td>Islamic Art</td></tr>
+            <tr><td>17</td><td>Medieval Art</td></tr>
+            <tr><td>19</td><td>Photographs</td></tr>
+            <tr><td>21</td><td>Modern and Contemporary Art</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>To retrieve the full current department list programmatically:</p>
+      <div class="pre-label">Request</div>
+      <pre><code>GET https://collectionapi.metmuseum.org/public/collection/v1/departments</code></pre>
+
+      <h2 id="met-errors">Error handling</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Status code</th><th>Meaning</th><th>Common cause</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>200</code></td><td>OK</td><td>Request succeeded.</td></tr>
+            <tr><td><code>400</code></td><td>Bad Request</td><td>Missing required parameter (e.g., <code>q</code> on Search, <code>objectID</code> on Get Object).</td></tr>
+            <tr><td><code>404</code></td><td>Not Found</td><td>The specified <code>objectID</code> does not exist or has been removed from the collection.</td></tr>
+            <tr><td><code>500</code></td><td>Internal Server Error</td><td>Server-side error. Retry after a short delay.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note"><strong>Note:</strong> The API does not return a JSON error body. On error, only the HTTP status code is returned. Check the status code before parsing the response body.</div>
+
+      <h2 id="met-examples">Full examples</h2>
+      <h3>Find public-domain paintings from Japan with images</h3>
+      <div class="pre-label">Request</div>
+      <pre><code>curl "https://collectionapi.metmuseum.org/public/collection/v1/search?q=landscape&geoLocation=Japan&hasImages=true&medium=Paintings&departmentId=6"</code></pre>
+      <div class="pre-label">Python</div>
+      <pre><code>import requests
+
+BASE = "https://collectionapi.metmuseum.org/public/collection/v1"
+
+# Search for landscape paintings from Japan
+search = requests.get(f"{BASE}/search", params={
+    "q": "landscape",
+    "geoLocation": "Japan",
+    "hasImages": True,
+    "medium": "Paintings",
+    "departmentId": 6
+})
+search.raise_for_status()
+object_ids = search.json().get("objectIDs", [])
+
+# Fetch the first result
+if object_ids:
+    obj = requests.get(f"{BASE}/objects/{object_ids[0]}")
+    obj.raise_for_status()
+    data = obj.json()
+    print(data["title"], "—", data["artistDisplayName"])
+    print("Image:", data["primaryImage"])</code></pre>
+    </div>
+  </div>
+</div>
+
+<script>
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
